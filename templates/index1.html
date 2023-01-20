@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Stock Price Prediction</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="text-center my-5">Stock Price Prediction</h1>
+      <form method="post" class="mx-auto" style="width:500px;">
+        <div class="form-group">
+          <label for="symbol">Stock Symbol</label>
+          <input type="text" class="
+form-control" id="symbol" name="symbol" placeholder="Enter stock symbol">
+</div>
+<button type="submit" class="btn btn-primary">Predict</button>
+ <button type="submit" class="btn btn-danger">Delete</button>
+</form>
+{% if image_base64 %}
+<div class="my-5">
+<img class="mx-auto d-block" src="data:image/png;base64, {{ image_base64 }}" alt="Predictions">
+</div>
+{% endif %}
+</div>
+  </body>
+</html>
