@@ -14,11 +14,10 @@
 form-control" id="symbol" name="symbol" placeholder="Enter stock symbol">
 </div>
 <button type="submit" class="btn btn-primary">Predict</button>
-
 </form>
 {% if image_base64 %}
 <div class="my-5">
-<img class="mx-auto d-block" src="data:image/png;base64, {{ image_base64 }}" alt="Predictions">
+<img class="mx-auto d-block" src="data:image/png;base64 , {{ image_base64 }}" alt="Predictions" width="1000" height="700">
 </div>
 {% endif %}
 </div>

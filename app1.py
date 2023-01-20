@@ -1,4 +1,6 @@
 import os
+from datetime import timedelta
+
 from flask import Flask, request, render_template
 from keras.models import load_model
 import yfinance as yf
@@ -34,7 +36,11 @@ def index():
         symbol = request.form['symbol']
         # Download the stock prices for the specified symbol
         stock_data = yf.download(symbol)
-        
+        # Generate future dates
+        last_date = stock_data['Close'].index[-1]
+        future_dates = []
+        for i in range(30):
+            future_dates.append((last_date + timedelta(days=i + 1)).strftime('%m/%d'))
 
         # Extract the stock price column
         stock_prices = stock_data['Close'].values.reshape(-1, 1)
@@ -56,8 +62,14 @@ def index():
         predictions = scaler.inverse_transform(predictions)
 
         # Plot the predictions and actual stock prices
-        plt.plot(stock_prices, label='Actual')
-        plt.plot(predictions, label='Predicted')
+        #plt.plot(stock_prices, label='Actual')
+        plt.plot(future_dates[:30],predictions[:30], label='Predicted')
+
+        plt.xticks(rotation=45, ha='right')
+        plt.subplots_adjust(bottom=0.1)
+        #plt.tick_params(axis='x', which='major', pad=15)
+        plt.tick_params(axis='x', labelsize=8)
+        #plt.gca().xaxis.set_major_locator(future_dates.AutoDateLocator(minticks=3, maxticks=10))
         plt.legend()
 
 
